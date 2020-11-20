@@ -21,7 +21,8 @@ class PostsController extends Controller
         $returnedPosts = [];
 
         foreach($posts as $post){
-            $commentsCurl = curl_init(self::COMMENTS_API_URL . "?postId=$post->id");
+            $commentsCurl = curl_init(self::POSTS_API_URL . "/$post->id/comments");
+            // $commentsCurl = curl_init(self::COMMENTS_API_URL . "?postId=$post->id");
             curl_setopt($commentsCurl, CURLOPT_RETURNTRANSFER, true);
             $comments = json_decode(curl_exec($commentsCurl));
             $postObj = (object)[
